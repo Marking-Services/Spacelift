@@ -79,9 +79,9 @@ function spacelift_preprocess_block(&$variables) {
 
       $parentUrl = $link->getUrlObject();
 
-      $currentUrl = \Drupal\Core\Url::fromRouteMatch(\Drupal::routeMatch())->getInternalPath();
+      $currentUrl = Url::fromRouteMatch(\Drupal::routeMatch())->getInternalPath();
 
-      $parentPath = $alias = \Drupal::service('path.alias_manager')->getAliasByPath('/' . $parentUrl->getInternalPath());
+      $parentPath = $alias = \Drupal::service('path_alias.manager')->getAliasByPath('/' . $parentUrl->getInternalPath());
       $parentUrlActive = ($parentUrl->getInternalPath() == $currentUrl);
     }
 
