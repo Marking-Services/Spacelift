@@ -1,0 +1,74 @@
+////
+/// Styles used by Storybook to demonstrate the various motions
+/// These styles are only compiled with Storybook - not the theme
+////
+
+.motion {
+  padding: 0 1rem;
+}
+
+.motion__grid {
+  @media (min-width: 920px) {
+    display: flex;
+    flex-wrap: wrap;
+  }
+}
+
+.motion__grid-item {
+  @media (min-width: 920px) {
+    margin-bottom: 1rem;
+    margin-right: 1rem;
+    width: 49%;
+
+    &:nth-child(2n) {
+      margin-right: 0;
+    }
+  }
+}
+
+.demo-motion {
+  background-color: color(background-section);
+  border-radius: 2px;
+  color: color(text);
+  cursor: pointer;
+  padding: 3rem;
+  text-align: center;
+
+  span {
+    display: block;
+    margin: 0.25rem;
+  }
+
+  &--fade {
+    @include transition;
+
+    &:hover {
+      background-color: color(accent);
+    }
+  }
+
+  &--slide-up {
+    @include transition(transform, 0.4s, ease-in);
+
+    &:hover {
+      transform: translateY(-10px);
+    }
+  }
+
+  &--slide-down {
+    @include transition(transform, 0.2s, linear);
+
+    &:hover {
+      transform: translateY(10px);
+    }
+  }
+
+  &--expand {
+    @include transition(transform, 0.3s, cubic-bezier(0.17, 0.67, 0.83, 0.67));
+
+    &:hover {
+      transform: scale(1.03);
+    }
+  }
+}
+

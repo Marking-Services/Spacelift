@@ -1,0 +1,9 @@
+{
+  "name": "FlexRow",
+  "description": "Flex Row Styles",
+  "entries": {
+    "scss": [
+      "FlexRow.scss"
+    ]
+  }
+}

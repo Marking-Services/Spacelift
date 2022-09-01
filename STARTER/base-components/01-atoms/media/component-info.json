@@ -1,0 +1,9 @@
+{
+  "name": "Media",
+  "description": "Media",
+  "entries": {
+    "scss": [
+      "Video/Video.scss"
+    ]
+  }
+}

@@ -1,0 +1,29 @@
+{#
+/**
+ * @file
+ * ResourcesSearchBar
+ * for Product Sell Sheets, Technical Data Sheets
+ * used on Resources Listing Page
+ *
+*/
+#}
+
+
+{% set resources_search_bar__base_class = resources_search_bar__base_class|default('ResourcesSearchBar') %}
+{% set resources_search_bar__extra_classes = resources_search_bar__extra_classes|default(['bg-blue']) %}
+
+<div {{ suit(resources_search_bar__base_class, resources_search_bar__modifiers, resources_search_bar__blockname, resources_search_bar__extra_classes) }}>
+  <div class="grid-container">
+    <div class="SearchBar vertical-center">
+      <div {{ suit('label', [], resources_search_bar__base_class, ['HeaderFont', 'uppercase']) }}>
+        Search Documents
+      </div>
+      {% block resource_search_bar__search %}
+        {% include '@molecules/SearchForm/SearchForm.twig' with {
+          search_form__extra_classes: ['cell', 'auto'],
+          search_form__has_button: true
+        } %}
+      {% endblock %}
+    </div>
+  </div>
+</div>

@@ -1,0 +1,15 @@
+////
+/// Accent - Line
+/// Includes a mixin and a utility class to style a Line accent element
+////
+
+@mixin line {
+  background: color(accent);
+  height: 5px;
+  margin-bottom: 1.25rem;
+  width: 71px;
+}
+
+.Line {
+  @include line;
+}

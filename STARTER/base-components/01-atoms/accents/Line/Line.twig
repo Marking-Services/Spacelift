@@ -1,0 +1,17 @@
+{#
+/**
+ * @file
+ * Template for Line accent
+ *
+ * Available variables:
+ * - line__base_class - the base classname
+ * - line__modifiers - array of modifiers to add to the base classname
+ * - line__blockname - blockname prepended to the base classname
+ */
+#}
+
+{{ attach_library('{{starter}}/Accents') }}
+
+{% set line__base_class = line__base_class|default('Line') %}
+
+<div {{ suit(line__base_class, line__modifiers, line__blockname) }}></div>

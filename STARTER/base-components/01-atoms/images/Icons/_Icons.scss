@@ -1,0 +1,30 @@
+$IconsDemoIconPadding: 1rem !default;
+$IconsDemoItemMargin: calc(1rem / 4) !default;
+
+// Storybook styling
+.IconsDemo {
+  display: flex;
+  flex-wrap: wrap;
+
+  .Icon {
+    height: 100px;
+    padding: $IconsDemoIconPadding;
+    width: 100px;
+
+    //@media (prefers-color-scheme: dark) {
+    //  fill: color(secondary);
+    //}
+  }
+
+  pre {
+    background-color: color(background-section);
+    font-size: 0.8rem;
+    margin: 0;
+    text-align: center;
+  }
+
+  &-item {
+    border: 1px solid color(background-section);
+    margin: $IconsDemoItemMargin;
+  }
+}

@@ -1,0 +1,27 @@
+{#
+/**
+ * Available variables:
+ * - ul__items: List items
+ *
+ * Available blocks:
+ * - list_content: Block of list items
+ */
+#}
+
+{{ attach_library('{{starter}}/lists') }}
+
+{% set ul__base_class = ul__base_class|default('Ul') %}
+
+<ul {{ suit(ul__base_class, ul__modifiers, ul__blockname, ul__extra_classes) }}>
+  {% block list_content %}
+    {% for item in ul__items %}
+      {% include '@atoms/lists/_ListItem.twig' with {
+        li__label: item.label,
+        li__content: item.content,
+        li__base_class: item.base_class,
+        li__modifiers: item.modifiers,
+        li__blockname: item.blockname,
+      } %}
+    {% endfor %}
+  {% endblock %}
+</ul>

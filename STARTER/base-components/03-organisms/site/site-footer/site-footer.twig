@@ -1,0 +1,16 @@
+{% set footer__base_class = 'Footer' %}
+
+<footer {{ suit(footer__base_class) }}>
+  <div {{ suit('inner', [], footer__base_class) }}>
+    <div {{ suit('social', [], footer__base_class) }}>
+      {% block footer__social %}
+        {% include '@molecules/SocialLinks/SocialLinks.twig' %}
+      {% endblock %}
+    </div>
+    <div {{ suit('menu', [], footer__base_class) }}>
+      {% block footer__menu %}
+        {% include '@molecules/Menu/Inline/InlineMenu.twig' %}
+      {% endblock %}
+    </div>
+  </div>
+</footer>

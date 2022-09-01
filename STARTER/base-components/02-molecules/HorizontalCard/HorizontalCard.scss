@@ -1,0 +1,125 @@
+$HorizontalCard-background: white !default;
+$HorizontalCard-border: 1px solid gray !default;
+$HorizontalCard-listLinkColor: blue !default;
+$HorizontalCard-listLinkHover: red !default;
+
+.HorizontalCard {
+  &-container {
+    background: $HorizontalCard-background;
+    border: $HorizontalCard-border;
+
+    @include breakpoint(medium) {
+      height: 100%;
+    }
+  }
+
+  &-header {
+    padding: 1rem 1.5rem;
+  }
+
+  &-body {
+    border-top: 0;
+    flex-flow: column wrap;
+    height: 100%;
+    padding: 1.5rem;
+
+    @include breakpoint(large) {
+      flex-flow: row wrap;
+    }
+  }
+
+  &-image {
+    margin-right: 1rem;
+    min-height: 74px;
+    min-width: 74px;
+
+    svg {
+      /* for the Locations teaser on the contact page */
+      display: block;
+      height: 74px;
+      width: 74px;
+    }
+
+    img {
+      height: 74px;
+      width: 74px;
+      object-fit: contain; /* using contain because of the icons they sourced */
+    }
+
+    @include breakpoint(large) {
+      margin-right: 1.5rem;
+    }
+
+    &--border {
+      border: 1px solid color(border);
+    }
+  }
+
+  &-button {
+    margin-top: 1rem;
+
+    @include breakpoint(large) {
+      margin-top: 0;
+    }
+  }
+
+  a {
+    @include transition;
+
+    color: $HorizontalCard-listLinkColor;
+
+    &.button {
+      color: color(text-inverse);
+
+      &:hover {
+        color: color(text-inverse);
+      }
+    }
+
+    &:hover {
+      color: $HorizontalCard-listLinkHover;
+
+      svg {
+        path {
+          fill: $HorizontalCard-listLinkHover !important; // sorry
+        }
+      }
+    }
+  }
+
+  &-list {
+    li {
+      margin-bottom: 0.5rem;
+    }
+
+    .fas {
+      color: $HorizontalCard-listLinkHover;
+      width: 1.75rem;
+    }
+  }
+
+  &-tinyIcon {
+    position: relative;
+    top: 3px;
+
+    svg {
+      max-height: 20px;
+      max-width: 25px;
+
+      path {
+        @include transition;
+
+        fill: $HorizontalCard-listLinkColor !important; // sorry, it wouldn't take it
+      }
+    }
+  }
+
+  .button,
+  p:last-child {
+    margin-bottom: 0;
+  }
+
+  ul {
+    margin-bottom: 1rem;
+  }
+}

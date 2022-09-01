@@ -1,0 +1,4 @@
+link__url: 'https://github.com/topfloortech/drupal-spacelift'
+link__content: 'Click here to learn more!'
+link__attributes:
+  'target': '_blank'

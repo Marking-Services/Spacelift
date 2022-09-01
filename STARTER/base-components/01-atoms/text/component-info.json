@@ -1,0 +1,11 @@
+{
+  "name": "Text",
+  "description": "Text Elements",
+  "entries": {
+    "scss": [
+      "Text.scss",
+      "Blockquote.scss",
+      "Heading.scss"
+    ]
+  }
+}

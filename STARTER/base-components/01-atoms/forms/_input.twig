@@ -1,0 +1,18 @@
+{#
+/**
+ * @file
+ * Theme override for an 'input' #type form element.
+ *
+ * Available variables:
+ * - attributes: A list of HTML attributes for the input element.
+ * - children: Optional additional rendered elements.
+ *
+ * @see template_preprocess_input()
+ */
+#}
+
+{{ attach_library('{{starter}}/Forms') }}
+
+{% set input__base_class = input__base_class|default('Input') %}
+
+<input {{ suit(input__base_class, input__modifiers, input__blockname, input__extra_classes) }} />{{ children }}

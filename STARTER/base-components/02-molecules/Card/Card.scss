@@ -1,0 +1,62 @@
+$Card-background: white !default;
+$Card-headerColor: black !default;
+$Card-bodyColor: gray !default;
+$Card-paddingAspectRatio: 50% !default;
+
+.Card {
+  $self: &;
+
+  a {
+    background: $Card-background;
+    display: block;
+    height: 100%;
+    position: relative;
+
+    h3 {
+      color: $Card-headerColor;
+    }
+  }
+
+  &-text {
+    padding: 1rem;
+
+    @include breakpoint(medium) {
+      padding: 1.25rem 1.25rem 3rem;
+      .link:last-child {
+        position: absolute;
+        left: 1.25rem;
+        bottom: 1.5rem;
+      }
+    }
+
+    @include breakpoint(large) {
+      padding: 2rem 1.5rem 3.5rem;
+      .link:last-child {
+        position: absolute;
+        left: 1.25rem;
+        bottom: 1.5rem;
+        width: calc(100% - 2rem); /* because this is absolute, we need some space around it */
+      }
+    }
+
+    #{$self}--tight-space & {
+      padding: 1rem 0.5rem;
+
+      @include breakpoint(medium) {
+        padding: 1.25rem 0.5rem;
+      }
+    }
+
+    p {
+      color: $Card-bodyColor;
+    }
+  }
+
+  &-image {
+    padding-top: $Card-paddingAspectRatio;
+  }
+
+  img {
+    object-fit: cover;
+  }
+}

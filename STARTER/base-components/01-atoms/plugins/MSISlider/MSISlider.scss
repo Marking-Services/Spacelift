@@ -1,0 +1,51 @@
+$Slider-border: 1px solid #fff !default;
+$Slider-arrowBackground: red !default;
+$Slider-arrowBackgroundHover: red !default;
+
+.Slider {
+  position: relative;
+  padding-bottom: 2rem;
+
+  .slick-slide {
+    padding: 0;
+  }
+
+  .slick-prev, .slick-next {
+    width: 80px;
+    height: 27px;
+    background: $Slider-arrowBackground;
+    border: $Slider-border;
+    position: absolute;
+    bottom: 0;
+    top: auto;
+    @include transition;
+
+    &:hover {
+      background: $Slider-arrowBackgroundHover;
+    }
+
+    &::before {
+      //color: $red;
+      font-family: 'Font Awesome 5 Pro', sans-serif;
+      font-weight: bold;
+      opacity: 1;
+    }
+  }
+
+  .slick-next {
+    right: calc(50% - 83px);
+
+    &::before {
+      content: '\f30b';
+
+    }
+  }
+
+  .slick-prev {
+    left: calc(50% - 83px);
+
+    &::before {
+      content: '\f30a';
+    }
+  }
+}

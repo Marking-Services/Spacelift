@@ -1,0 +1,147 @@
+<?php
+
+/**
+ * @file
+ * Functions to support theming in the Spacelift child theme.
+ */
+
+use Drupal\block_content\BlockContentInterface;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Url;
+use Drupal\media\Entity\Media;
+
+/**
+ * Implements template_preprocess_page.
+ */
+function {{starter}}_preprocess_page(array &$variables) {
+  $site_name = \Drupal::configFactory()->get('system.site')->get('name');
+  $variables['linked_site_name'] = [
+    '#type' => 'link',
+    '#title' => $site_name,
+    '#url' => Url::fromRoute('<front>'),
+  ];
+}
+
+/**
+ * Implements template_preprocess_block.
+ */
+function {{starter}}_preprocess_block(array &$variables) {
+  $content = $variables['elements']['content'];
+
+  if (isset($content['#block_content']) && $content['#block_content'] instanceof BlockContentInterface) {
+    $block_content = $content['#block_content'];
+    $bundle = $block_content->bundle();
+
+    switch ($bundle) {
+      case 'interactive_header_banner':
+        $background_images = [
+          'main_background_image',
+          'background_image_section_1',
+          'background_image_section_2',
+        ];
+
+        foreach ($background_images as $field) {
+          $media_id = $block_content->get("field_$field")->target_id;
+          $media_entity = Media::load($media_id);
+          $uri = $media_entity->field_media_image->entity->getFileUri();
+          $variables[$field . '_uri'] = $uri;
+        }
+        break;
+
+      default:
+        break;
+    }
+  }
+}
+
+/**
+ * Implements template_preprocess_taxonomy_term().
+ */
+function {{starter}}_preprocess_taxonomy_term(&$variables) {
+  /** @var \Drupal\taxonomy\TermInterface $term */
+  $term = $variables['elements']['#taxonomy_term'];
+  $bundle = $term->bundle();
+
+  switch ($bundle) {
+    case 'resource_types':
+      if (!$term->get('field_listing_page')->isEmpty()) {
+        $listing_page = $term->get('field_listing_page')->getValue();
+        $uri = $listing_page[0]['uri'];
+        $variables['resource_page_url'] = Url::fromUri($uri)->toString();
+      }
+      break;
+  }
+}
+
+/**
+ * Implements hook_theme_suggestions_block_alter().
+ */
+function {{starter}}_theme_suggestions_block_alter(array &$suggestions, array $variables) {
+  if (isset($variables['elements']['content']['#block_content'])) {
+    array_splice($suggestions, 1, 0, 'block__bundle__' . $variables['elements']['content']['#block_content']->bundle());
+  }
+}
+
+/**
+ * Implements hook_theme_suggestions_HOOK_alter() for form templates.
+ */
+function {{starter}}_theme_suggestions_form_alter(array &$suggestions, array $variables) {
+  $form_id = $variables['element']['#id'];
+
+  switch ($form_id) {
+    case 'views-exposed-form-search-block-search-results':
+      $suggestions[] = 'form__search_block_form';
+      break;
+
+    default:
+      break;
+  }
+}
+
+/**
+ * Implements hook_theme_suggestions_taxonomy_term_alter().
+ */
+function {{starter}}_theme_suggestions_taxonomy_term_alter(array &$suggestions, array $variables) {
+  /** @var \Drupal\taxonomy\TermInterface $term */
+  $term = $variables['elements']['#taxonomy_term'];
+  $sanitized_view_mode = strtr($variables['elements']['#view_mode'], '.', '_');
+  // Add view mode theme suggestions.
+  $suggestions[] = 'taxonomy_term__' . $sanitized_view_mode;
+  $suggestions[] = 'taxonomy_term__' . $term->bundle() . '__' . $sanitized_view_mode;
+  $suggestions[] = 'taxonomy_term__' . $term->id() . '__' . $sanitized_view_mode;
+}
+
+/**
+ * Implements theme_preprocess_region().
+ */
+function {{starter}}_preprocess_region(array &$variables) {
+  foreach ($variables['elements'] as $block_name => $block) {
+    if ($block_name[0] !== '#') {
+      $variables['blocks'][$block_name] = $block;
+    }
+  }
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function {{starter}}_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  switch ($form['#form_id']) {
+    case '':
+      break;
+  }
+}
+
+/**
+ * Implements hook_form_BASE_FORM_ID_alter().
+ */
+function {{starter}}_form_views_exposed_form_alter(array &$form, FormStateInterface $form_state, $form_id) {
+  switch ($form['#id']) {
+    case 'views-exposed-form-search-block-search-results':
+      $form['search']['#attributes']['class'][] = 'SearchForm-input';
+      $form['actions']['#attributes']['class'][] = 'FormWrapper-noPadding';
+      $form['actions']['submit']['#attributes']['class'][] = 'SearchForm-icon';
+      $form['actions']['submit']['#value'] = '';
+      break;
+  }
+}

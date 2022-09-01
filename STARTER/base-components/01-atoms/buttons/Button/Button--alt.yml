@@ -1,0 +1,3 @@
+button__content: 'Alternative Button'
+button__modifiers:
+  - 'hollow'
