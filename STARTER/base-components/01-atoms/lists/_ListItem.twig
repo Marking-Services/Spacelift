@@ -1,0 +1,22 @@
+{#
+/**
+ * Available variables:
+ * - li__label: (optional) A <strong> label before the list item itself
+ * - li__content: The content of the list_item (typically text)
+ *
+ * Available blocks:
+ * - li__content: Used to replace the content of the list_item with something other than text
+ */
+#}
+
+{% set li__base_class = li__base_class|default('ListItem') %}
+
+<li {{ suit(li__base_class, li__modifiers, li__blockname, li__extra_classes) }}>
+  {% block li__content %}
+    {% if li__label %}
+      <strong>{{ li__label }}</strong>
+    {% endif %}
+
+    {{ li__content }}
+  {% endblock %}
+</li>

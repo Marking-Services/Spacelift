@@ -1,15 +1,41 @@
 {
-  "assets": {
-
+  "paths": {
+    "baseComponents": "base-components",
+    "dist": {
+      "dir": "dist",
+      "css": "css",
+      "js": "js",
+      "fonts": "fonts",
+      "icons": "icons"
+    },
+    "src": {
+      "dir": "src",
+      "fonts": "fonts",
+      "icons": "icons",
+      "js": "js",
+      "scss": "scss"
+    },
+    "images": "images"
   },
+  "images": {
+    "loadImages": true,
+    "imageminEnabled": false
+  },
+  "sources": {
+    "scss": ["src/scss/**/*.scss", "base-components/*/scss/**/*.scss"],
+    "images": "images/**/*.+(jpeg|jpg|png|gif|svg)",
+    "fonts": "src/fonts/*.{ttf,otf}",
+    "js": ["src/js/**/*.js", "base-components/*/js/**/*.js"],
+    "icons": "src/icons",
+    "iconFiles": "*.svg",
+    "twig": ["templates/**/*.html.twig", "base-components/*/templates/**/*.html.twig"]
+  },
+  "assets": {},
   "browserSync": {
-    "enabled": false,
-    "hostname": "localhost",
-    "port": 8080
+    "enabled": false
   },
   "drush": {
-    "enabled": false,
-    "watchDelay": 150
+    "enabled": false
   },
   "icons": {
     "enabled": true
@@ -20,7 +46,10 @@
   "fontAwesome": {
     "enabled": false
   },
-  "kbox": {
+  "lando": {
+    "enabled": false
+  },
+  "modernizr": {
     "enabled": false
   },
   "sass": {
@@ -30,6 +59,6 @@
     "enabled": true
   },
   "twig": {
-    "enabled": true
+    "enabled": false
   }
 }

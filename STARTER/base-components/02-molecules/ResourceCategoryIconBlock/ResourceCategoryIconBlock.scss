@@ -1,0 +1,66 @@
+$ResourceCategoryIconBlock-Title: pink !default;
+$ResourceCategoryIconBlock-hoverTitle: red !default;
+$ResourceCategoryIconBlock-iconBackground: yellow !default;
+$ResourceCategoryIconBlock-iconColor: black !default;
+
+.ResourceCategoryIconBlock {
+  $self: &;
+
+  height: 100%;
+
+  &-container {
+    display: flex;
+    flex-flow: row wrap;
+    height: 100%;
+
+    &:hover {
+      #{$self}-titleContainer {
+        background: $ResourceCategoryIconBlock-hoverTitle;
+      }
+    }
+  }
+
+  &-icon {
+    @include transition;
+
+    align-items: center;
+    background: $ResourceCategoryIconBlock-iconBackground;
+    color: $ResourceCategoryIconBlock-iconColor;
+    display: flex;
+    flex: 0 0 auto;
+    font-size: 30px;
+    min-height: 0;
+    min-width: 0;
+    padding: 0.75rem;
+    text-align: center;
+    width: 60px;
+
+    svg {
+      max-height: 40px;
+      width: 100%;
+
+      path {
+        fill: color(text-inverse);
+      }
+    }
+  }
+
+  &-titleContainer {
+    align-items: center;
+    background: $ResourceCategoryIconBlock-Title;
+    display: flex;
+    flex: 0 0 auto;
+    min-height: 0;
+    min-width: 0;
+    padding: 1rem;
+    text-transform: uppercase;
+    transition: ease background 0.3s;
+    width: calc(100% - 60px);
+  }
+
+  &-title {
+    color: $ResourceCategoryIconBlock-iconColor;
+    margin-bottom: 0;
+    width: 100%;
+  }
+}

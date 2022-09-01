@@ -1,0 +1,108 @@
+{#
+/**
+ * @file
+ * used on Homepage
+ *
+ * Available variables:
+ * - hero_banner__image
+ * - hero_banner__title
+ * - hero_banner__body
+ * - hero_banner__image_1
+ * - hero_banner__icon_1
+ * - hero_banner__title_1
+ * - hero_banner__body_1
+ * - hero_banner__cta_1
+ * - hero_banner__url_1
+ * - hero_banner__image_2
+ * - hero_banner__icon_2
+ * - hero_banner__title_2
+ * - hero_banner__body_2
+ * - hero_banner__cta_2
+ * - hero_banner__url_2
+*/
+#}
+
+{{ attach_library('{{starter}}/hero-banner') }}
+
+{% set hero_banner__base_class = hero_banner__base_class|default('HeroBanner') %}
+
+{#
+<!-- INLINE STYLING so that I can get the PHP variable. Anyone have ideas on how to do this in a better way? -->
+<style>
+
+  @media screen and (max-width: 1023px) {
+    .HeroBanner-openBlock, .HeroBanner-block--two, .HeroBanner-block--three {
+      background-size: cover;
+    }
+
+    .HeroBanner-openBlock {
+      background: url({{ hero_banner__image }}) no-repeat center;
+    }
+
+    .HeroBanner-block--two {
+      background: url({{ hero_banner__image_1 }}) no-repeat center;
+    }
+
+    .HeroBanner-block--three {
+      background: url({{ hero_banner__image_2 }}) no-repeat center;
+    }
+  }
+</style>
+#}
+
+<header id="HeroBanner" {{ suit(hero_banner__base_class, hero_banner__modifiers, hero_banner__blockname, hero_banner__extra_classes) }}>
+  <div {{ suit('backgrounds', [], hero_banner__base_class) }}>
+    <div {{ suit('background', ['one'], hero_banner__base_class, ['show']) }} style="background: url({{ hero_banner__image }}) center/cover no-repeat;"></div>
+    <div {{ suit('background', ['two'], hero_banner__base_class) }} style="background: url({{ hero_banner__image_1 }}) center/cover no-repeat;"></div>
+    <div {{ suit('background', ['three'], hero_banner__base_class) }} style="background: url({{ hero_banner__image_2 }}) center/cover no-repeat;"></div>
+  </div>
+  <div {{ suit('container', [], hero_banner__base_class, ['grid-x']) }}>
+    <div {{ suit('openBlock', [], hero_banner__base_class, ['cell', 'large-6']) }} style="background: url({{ hero_banner__image }}) center/cover no-repeat;">
+      <div {{ suit('openBlockOverlay', [], hero_banner__base_class) }}></div>
+      <div {{ suit('openBlockTextwrap', [], hero_banner__base_class ) }}>
+        {% include '@atoms/accents/Line/Line.twig' %}
+        {% include '@atoms/text/Heading.twig' with {
+          heading__level: 1,
+          heading: hero_banner__title,
+          heading__extra_classes: ['white'],
+          heading__attributes: {'itemprop': 'headline'},
+        } %}
+        <div class="large">{{ hero_banner__body }}</div>
+      </div>
+    </div>
+    <a href="{{ hero_banner__url_1 }}" {{ suit('block', ['two'], hero_banner__base_class, ['cell','medium-6','large-3']) }} data-herobanner="two" style="background: url({{ hero_banner__image_1 }}) center/cover no-repeat;">
+      <div class="HeroBanner-blockOverlay"></div>
+      <div class="HeroBanner-blockContainer medium-text-center">
+        <div class="HeroBanner-blockIcon">
+          {% block icon_section_1 %}
+            <div class="HeroBanner-blockIconContainer" style="background: url({{ hero_banner__icon_1 }}) no-repeat center; background-size: cover; padding-top: 100%;"></div>
+          {% endblock %}
+        </div>
+        <div class="HeroBanner-blockText">
+          <h3 class="uppercase white">{{ hero_banner__title_1 }}</h3>
+          <div class="HeroBanner-blockHidden">
+            <div class="HeroBanner-blockBody">{{ hero_banner__body_1 }}</div>
+            <span class="link">{{ hero_banner__cta_1 }} <span class="fas fa-caret-right"></span></span>
+          </div>
+        </div>
+      </div>
+    </a>
+    <a href="{{ hero_banner__url_2 }}" {{ suit('block', ['three'], hero_banner__base_class, ['cell','medium-6','large-3']) }} data-herobanner="three" style="background: url({{ hero_banner__image_2 }}) center/cover no-repeat;">
+      <div class="HeroBanner-blockOverlay"></div>
+      <div class="HeroBanner-blockContainer medium-text-center">
+        <div class="HeroBanner-blockIcon">
+          {% block icon_section_2 %}
+            <div class="HeroBanner-blockIconContainer" style="background: url({{ hero_banner__icon_2 }}) no-repeat center; background-size: cover; padding-top: 100%;"></div>
+          {% endblock %}
+        </div>
+        <div class="HeroBanner-blockText">
+          <h3 class="uppercase white">{{ hero_banner__title_2 }}</h3>
+          <div class="HeroBanner-blockHidden">
+            <div class="HeroBanner-blockBody">{{ hero_banner__body_2 }}</div>
+            <span class="link">{{ hero_banner__cta_2 }} <span class="fas fa-caret-right"></span></span>
+          </div>
+        </div>
+      </div>
+    </a>
+  </div>
+</header>

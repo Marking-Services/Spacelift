@@ -1,0 +1,88 @@
+{#
+/**
+ * @file
+ * Callout Strip Block paragraph template.
+ *
+ * Available variables:
+ * - paragraph: Full paragraph entity.
+ *   - id: The paragraph ID.
+ *   - bundle: The type of the paragraph, for example, "image" or "text".
+ *   - authorid: The user ID of the paragraph author.
+ *   - createdtime: Formatted creation date. Preprocess functions can
+ *     reformat it by calling format_date() with the desired parameters on
+ *     $variables['paragraph']->getCreatedTime().
+ * - content: All paragraph items. Use {{ content }} to print them all,
+ *   or print a subset such as {{ content.field_example }}. Use
+ *   {{ content|without('field_example') }} to temporarily suppress the printing
+ *   of a given child element.
+ * - attributes: HTML attributes for the containing element.
+ *   The attributes.class element may contain one or more of the following
+ *   classes:
+ *   - paragraphs: The current template type (also known as a "theming hook").
+ *   - paragraphs--type-[type]: The current paragraphs type. For example, if the paragraph is an
+ *     "Image" it would result in "paragraphs--type--image". Note that the machine
+ *     name will often be in a short form of the human readable label.
+ *   - paragraphs--view-mode--[view_mode]: The View Mode of the paragraph; for example, a
+ *     preview would result in: "paragraphs--view-mode--preview", and
+ *     default: "paragraphs--view-mode--default".
+ * - view_mode: View mode; for example, "preview" or "full".
+ * - logged_in: Flag for authenticated user status. Will be true when the
+ *   current user is a logged-in member.
+ * - is_admin: Flag for admin user status. Will be true when the current user
+ *   is an administrator.
+ *
+ * @see template_preprocess_paragraph()
+ *
+ * @ingroup themeable
+ */
+#}
+
+{% set classes = [
+  paragraph.bundle|clean_class
+] %}
+
+{{ attach_library('{{starter}}/half-callout-strip') }}
+{{ attach_library('{{starter}}/individual-resource-downloads-thumbnail') }}
+
+{% set half_callout_strip__base_class = half_callout_strip__base_class|default('HalfCalloutStrip') %}
+{% set half_callout_strip__extra_classes = half_callout_strip__extra_classes|default(['FlexRow-item']) %}
+
+{#{{ content.field_resource_link }}#}
+ {% if ( paragraph.field_link_to.value == 'resource') %}
+{#   dump resource link:#}
+{#   <pre>#}
+{# {{ dump(paragraph.field_resource_link.entity) }}#}
+{#     </pre>#}
+   {% set link = '#placeholder' %}
+ {% endif %}
+{% if paragraph.field_link_to.value == 'page' %}
+  {% set link = paragraph.field_link.0.url %}
+{% endif %}
+
+<div {{ suit(half_callout_strip__base_class, half_callout_strip__modifiers, half_callout_strip__blockname, half_callout_strip__extra_classes) }}>
+  <div {{ suit('container', half_callout_strip__modifiers, half_callout_strip__base_class, ['bg-blue']) }}>
+    <div class="IndividualResourceDownloadsThumbnail">
+      <div class="IndividualResourceDownloadsThumbnail-image">
+        {{ content.field_media }}
+      </div>
+      <div class="IndividualResourceDownloadsThumbnail-text">
+        <h3 class="HeaderFont--regular">
+          <a href="{{ link }}"
+            {% if ( paragraph.field_link_to.value == 'resource') %}
+              target="_blank"
+            {% endif %}
+          >
+            {{ content.field_heading }}
+          </a>
+        </h3>
+
+        <p>{{ content.field_caption }}</p>
+
+        {% if ( paragraph.field_link_to.value == 'page') %}
+          <a href="{{ link }}" class="link">{{ paragraph.field_link.0.title }} <span
+              class="fas fa-caret-right"></span></a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>

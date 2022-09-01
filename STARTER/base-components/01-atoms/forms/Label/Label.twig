@@ -1,0 +1,28 @@
+{#
+/**
+ * @file
+ * Template for Label element
+ *
+ * Available variables:
+ * - label__content - the content of the label (typically text)
+ * - label__for - the id of the input that this label is for
+ *
+ * Available blocks:
+ * - label__content - used to replace the content of the label with something other than text
+ *   for example: to insert an input element
+ */
+#}
+
+{% set label__base_class = label__base_class|default('Label') %}
+{% set additional_attributes = {
+  'class': suit(label__base_class, label__modifiers, label__blockname),
+  'for': label__for,
+} %}
+
+{% spaceless %}
+  <label {{ add_attributes(additional_attributes) }}>
+     {% block label__content %}
+       {{ label__content }}
+     {% endblock %}
+  </label>
+{% endspaceless %}

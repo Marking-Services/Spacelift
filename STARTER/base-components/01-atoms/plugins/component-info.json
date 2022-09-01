@@ -1,0 +1,10 @@
+{
+  "name": "Plugins",
+  "description": "JS Plugins",
+  "entries": {
+    "scss": [
+      "Tooltip/Tooltip.scss",
+      "Slider/Slider.scss"
+    ]
+  }
+}

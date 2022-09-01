@@ -1,0 +1,9 @@
+dl__items:
+  - term: 'Definition List'
+    def: 'A number of connected items or names written or printed consecutively, typically one below the other.'
+  - term: 'This is a term.'
+    def: 'This is the definition of that term, which both live in a <code>dl</code>.'
+  - term: 'Here is another term.'
+    def: 'And it gets a definition too, which is this line.'
+  - term: 'Here is one last term.'
+    def: 'With the final definition.'

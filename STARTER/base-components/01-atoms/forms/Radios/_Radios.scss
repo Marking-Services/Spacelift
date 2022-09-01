@@ -1,0 +1,98 @@
+$RadioInputFontFamily: sans-serif !default;
+
+.RadioButtons {
+  list-style-type: none;
+
+  &-combo {
+    position: relative;
+  }
+
+  &-input[type="radio"] {
+    bottom: 0;
+    display: block;
+    left: 0;
+    opacity: 0.01;
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 20;
+
+    + label {
+      background: color(background);
+      border: 1px solid color(secondary);
+      color: color(secondary);
+      margin: 0;
+    }
+
+    &:checked + label,
+    .Checked + label {
+      background: color(secondary);
+      color: color(text-inverse);
+    }
+  }
+
+  &-button {
+    @include transition;
+
+    height: 100%;
+    margin: 0;
+    width: 100%;
+    z-index: 10;
+
+    &.active {
+      border: 2px solid color(secondary);
+    }
+  }
+}
+
+// Standard radio inputs
+.Radios {
+  list-style-type: none;
+  margin: 0;
+}
+
+.Radio {
+  padding: 0.5rem 0;
+  position: relative;
+
+  &:last-child {
+    padding-bottom: 0;
+  }
+
+  &-input[type="radio"] {
+    position: absolute;
+    visibility: hidden;
+    width: 1px;
+
+    + .Label {
+      margin-left: 0;
+      padding-left: 40px;
+      position: relative;
+
+      &::before {
+        background-color: color(background);
+        border: 1px solid color(secondary);
+        border-radius: 20px;
+        content: '';
+        display: block;
+        height: 20px;
+        left: 0;
+        line-height: 1em;
+        position: absolute;
+        text-align: center;
+        top: 4px;
+        width: 20px;
+      }
+    }
+
+    &:checked {
+      + .Label {
+        font-family: $RadioInputFontFamily;
+
+        &::before {
+          background: color(secondary);
+        }
+      }
+    }
+  }
+}

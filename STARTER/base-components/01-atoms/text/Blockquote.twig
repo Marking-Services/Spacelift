@@ -1,0 +1,17 @@
+{#
+/**
+ * Available variables:
+ * - blockquote__content: The content of the blockquote (typically text)
+ *
+ * Available blocks:
+ * - blockquote__content: Used to replace the content of the blockquote with something other than text
+ */
+#}
+
+{% set blockquote__base_class = blockquote__base_class|default('Blockquote') %}
+
+<blockquote {{ suit(blockquote__base_class, blockquote__modifiers, blockquote__blockname, blockquote__extra_classes) }}>
+  {% block blockquote__content %}
+    {{ blockquote__content }}
+  {% endblock %}
+</blockquote>

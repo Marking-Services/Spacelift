@@ -1,0 +1,11 @@
+@mixin link {
+  color: color(primary);
+
+  &:hover {
+    color: color(primary-dark);
+  }
+}
+
+.Link {
+  @include link;
+}

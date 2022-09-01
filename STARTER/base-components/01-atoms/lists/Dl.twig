@@ -1,0 +1,30 @@
+{#
+/**
+ * Available variables:
+ * - dl__items: List items
+ *
+ * Available blocks:
+ * - list_content: Block of list items
+ */
+#}
+
+{{ attach_library('{{starter}}/lists') }}
+
+{% set dl__base_class = dl__base_class|default('Dl') %}
+
+<dl {{ suit(dl__base_class, dl__modifiers, dl__blockname, dl__extra_classes) }}>
+  {% block list_content %}
+    {% for item in dl__items %}
+      {% include '@atoms/lists/_ListItem--definition.twig' with {
+        dl__term: item.term,
+        dl__def: item.def,
+        dl__term_base_class: item.term_base_class,
+        dl__def_base_class: item.def_base_class,
+        dl__term_modifiers: item.term_modifiers,
+        dl__def_modifiers: item.def_modifiers,
+        dl__term_blockname: item.term_blockname,
+        dl__def_blockname: item.def_blockname,
+      } %}
+    {% endfor %}
+  {% endblock %}
+</dl>

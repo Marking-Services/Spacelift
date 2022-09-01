@@ -1,0 +1,28 @@
+{#
+/**
+ * @file
+ * Default theme implementation of a responsive image.
+ *
+ * Available variables:
+ * - sources: The attributes of the <source> tags for this <picture> tag.
+ * - img_element: The controlling image, with the fallback image in srcset.
+ * - output_image_tag: Whether or not to output an <img> tag instead of a
+ *   <picture> tag.
+ *
+ * @see template_preprocess()
+ * @see template_preprocess_responsive_image()
+ *
+ * @ingroup themeable
+ */
+#}
+
+{% set output_picture_tag = not output_image_tag %}
+
+{#{{ dump(sources.0|keys) }}#}
+
+{% embed '@atoms/images/Image/ResponsiveImage.twig' with {
+  responsive_image__srcset: sources.0.srcset,
+  responsive_image__element: img_element,
+  responsive_image__output_picture_tag: output_picture_tag,
+} %}
+{% endembed %}

@@ -1,0 +1,10 @@
+{
+  "name": "Links",
+  "description": "Links",
+  "entries": {
+    "scss": [
+      "ButtonLink/ButtonLink.scss",
+      "Link/Link.scss"
+    ]
+  }
+}
